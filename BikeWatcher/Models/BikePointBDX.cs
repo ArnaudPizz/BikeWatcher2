@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BikeWatcher
 {
+// Get and set for BDX
     public class BikePointsBDX
     {
         public int id { get; set; }

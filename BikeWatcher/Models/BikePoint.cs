@@ -8,8 +8,9 @@ namespace BikeWatcher
 {
     public class BikePoints
     {
-
+// Initializing empty constructor to prevent a bug
         public BikePoints() { }
+// Setting variable of BDX with the same name as Lyon have
         public BikePoints(BikePointsBDX stationBdx)
         {
             lat = stationBdx.latitude;
@@ -18,13 +19,11 @@ namespace BikeWatcher
             status = stationBdx.is_online ? "OPEN" : "CLOSED";
             available_bikes = stationBdx.bike_count_total.ToString();
         }
-        
-        //public string number { get; set; }
+
+
+// Get and set for Lyon
         public string available_bikes { get; set; }
         public string lng { get; set; }
-        //public string bike_stands { get; set; }
-        //public string last_update { get; set; }
-        //public string available_bike_stands { get; set; }
         public string status { get; set; }
         public string address { get; set; }
         public string lat { get; set; }

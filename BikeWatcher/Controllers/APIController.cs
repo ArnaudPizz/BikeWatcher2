@@ -16,8 +16,7 @@ namespace BikeWatcher.Controllers
     {
         private static readonly HttpClient client = new HttpClient();
 
-
-        //Displaying list of bikepoints in Lyon
+//Displaying list of bikepoints in Lyon
         public async Task<IActionResult> Index()
         {
             var Bikepoints = await ProcessAPI();
@@ -28,12 +27,15 @@ namespace BikeWatcher.Controllers
         {
             var Bikepoints = await ProcessAPI();
             var stationBdx = await ProcessAPIBDX();
-            //Bikepoints.Concat(stationBdx);
+
+//Getting all points for Lyon and BDX
             Bikepoints.AddRange(stationBdx);
+
+//Put them in the same list
             return View(Bikepoints.ToList());
         }
 
-
+//Getting data from LYON API
         private static async Task<List<BikePoints>> ProcessAPI()
         {
             client.DefaultRequestHeaders.Accept.Clear();
@@ -41,23 +43,25 @@ namespace BikeWatcher.Controllers
             var Bikepoints = await JsonSerializer.DeserializeAsync<RootObject>(await streamTask);
             return Bikepoints.values;
         }
-
-
-
-
         
-        //Displaying list of bikepoints in Bordeaux
+
+
+
+//Displaying list of bikepoints in Bordeaux
         public async Task<IActionResult> BDX()
         {
             var Bikepoints = await ProcessAPIBDX();
             return View(Bikepoints.OrderBy(x => x.name).ToList());
         }
+
+//Getting data from BDX API
         private static async Task<List<BikePoints>> ProcessAPIBDX()
         {
             client.DefaultRequestHeaders.Accept.Clear();
             var streamTask = client.GetStreamAsync("https://api.alexandredubois.com/vcub-backend/vcub.php");
             var stationsBdx = await JsonSerializer.DeserializeAsync<List<BikePointsBDX>>(await streamTask);
             var result = new List<BikePoints>();
+//Loop to add stations to the list
             foreach (var stationBdx in stationsBdx)
             {
                 var station = new BikePoints(stationBdx);

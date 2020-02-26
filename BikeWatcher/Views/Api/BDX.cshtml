@@ -1,4 +1,5 @@
 ﻿@model List<BikePoints>
+
 <!-- Coloring  -->
 <style>
     .status-OPEN {
@@ -9,20 +10,20 @@
         color: red;
     }
 </style>
-<a class="btn btn-dark"asp-area="" asp-controller="API" asp-action="Index">Lyon</a>
+
+<!-- Link to Lyon API-->
+<a class="btn btn-dark" asp-area="" asp-controller="API" asp-action="Index">Lyon</a>
+
 <!-- Getting data and displaying stations-->
 @foreach (var data in Model)
 {
-<ul class="list-group">
-    <li class="list-group-item">
-        <p class="text-center h2 font-weight-bold">Station : @data.name</p>
-        <p class="status-@data.status">Statut :@data.status</p>
-        <p>Adresse : @data.address</p>
-        <p>Nombre de vélos : @data.available_bikes</p>
-    </li>
-</ul>
-
+    <ul class="list-group">
+        <li class="list-group-item">
+            <p class="text-center h2 font-weight-bold">Station : @data.name</p>
+            <p class="status-@data.status">Statut :@data.status</p>
+            <p>Nombre de vélos : @data.available_bikes</p>
+        </li>
+    </ul>
 }
-
 }
 
